@@ -12,7 +12,7 @@ import os
 print("=== MULAI INISIALISASI FLASK ===")
 app = Flask(__name__, template_folder="templates")
 print("=== MULAI LOAD MODEL ===")
-model = load_model('model_vgg16_pneumonia.h5')
+model = load_model('model_vgg16_pneumonia_small.h5')
 print("=== MODEL BERHASIL DILOAD ===")
 class_names = ['NORMAL', 'PNEUMONIA']
 
