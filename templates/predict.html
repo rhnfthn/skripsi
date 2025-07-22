@@ -1,0 +1,276 @@
+{% extends "base.html" %}
+
+{% block title %}Prediksi | Deteksi Pneumonia X-Ray{% endblock %}
+
+{% block head %}
+<style>
+:root {
+  --upload-bg: #f5f7fa;      /* Light mode */
+  --upload-color: #232e4d;
+}
+body.dark-mode, [data-theme="dark"] {
+  --upload-bg: #232e4d;      /* Dark mode */
+  --upload-color: #fff;
+}
+.upload-area {
+  padding: 48px 24px;
+  text-align: center;
+  position: relative;
+  cursor: pointer;
+  transition: border-color 0.2s;
+}
+.upload-area.dragover {
+  border-color: #3399ff;
+  background: #1a2238;
+}
+.upload-area input[type="file"] {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  opacity: 0;
+  left: 0;
+  top: 0;
+  cursor: pointer;
+  z-index: 2;
+}
+.upload-content {
+  position: relative;
+  z-index: 1;
+}
+.upload-icon {
+  font-size: 48px;
+  color: #3399ff;
+  margin-bottom: 12px;
+}
+.img-preview-box {
+  border-radius: 32px;
+  background: #f4f8fd;
+  box-shadow: 0 2px 16px rgba(108,160,220,0.13);
+  padding: 0;
+  text-align: center;
+  min-height: 220px;
+  min-width: 100%;
+  height: 220px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 0;
+}
+.img-preview-box img {
+  width: 100%;
+  height: auto;
+  object-fit: contain;
+  background: #fff;
+  border-radius: 32px;
+  box-shadow: 0 2px 12px rgba(108,160,220,0.10);
+}
+.result-col {
+  background: linear-gradient(135deg, #ffeaea 60%, #ffe3e3 100%);
+  border-radius: 28px;
+  box-shadow: 0 2px 16px rgba(108,160,220,0.10);
+  padding: 18px 18px 12px 18px;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: flex-start;
+  min-height: 120px;
+  height: 100%;
+}
+.result-box {
+  border-radius: 18px;
+  color: #fff;
+  font-size: 1.25rem;
+  min-height: 60px;
+  width: 100%;
+  margin-bottom: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-shadow: 0 2px 12px rgba(108,160,220,0.10);
+  padding: 18px 12px;
+  text-align: center;
+  font-weight: 600;
+  letter-spacing: 0.5px;
+  transition: box-shadow 0.2s;
+}
+.result-box.normal {
+  background: linear-gradient(135deg, #7ED6A5 60%, #43A047 100%);
+}
+.result-box.pneumonia {
+  background: linear-gradient(135deg, #FF8A80 60%, #E53935 100%);
+}
+.result-info {
+  border-radius: 18px;
+  font-size: 1.08em;
+  min-height: 60px;
+  margin-bottom: 0;
+  margin-top: 0;
+  box-shadow: 0 2px 12px rgba(108,160,220,0.07);
+}
+.btn-reset, #predictBtn {
+  min-width: 160px;
+  font-size: 1.15rem;
+  font-weight: 600;
+  border-radius: 28px !important;
+  margin: 0 10px;
+  transition: background 0.2s, color 0.2s, box-shadow 0.2s;
+}
+.btn-reset:hover {
+  background: #b0b0b0;
+  color: #fff;
+}
+#predictBtn:hover {
+  background: #43A047;
+  color: #fff;
+  box-shadow: 0 4px 16px 0 rgba(67,160,71,0.18);
+}
+@media (max-width: 991px) {
+  .img-preview-box, .result-col { min-height: 180px; height: auto; }
+}
+@media (max-width: 767px) {
+  .img-preview-box, .result-col { min-height: 120px; height: auto; }
+  .btn-reset, #predictBtn { min-width: 120px; font-size: 1rem; }
+}
+</style>
+{% endblock %}
+
+{% block content %}
+<div class="row justify-content-center align-items-center fade-in" style="min-height:60vh;">
+  <div class="col-lg-8">
+    <h2 class="mb-4 text-center section-title" style="font-family:'Poppins',sans-serif; letter-spacing:0.5px;"><i class="fa-solid fa-stethoscope me-2"></i>Prediksi Pneumonia dari X-Ray</h2>
+    <form id="predictForm" method="POST" enctype="multipart/form-data" autocomplete="off" class="fade-in">
+      {% if not prediction %}
+      <div id="uploadSection">
+        <div id="uploadArea" class="upload-area">
+          <input type="file" id="xrayInput" name="file" accept=".jpg,.jpeg,.png" tabindex="0" />
+          <div class="upload-content">
+            <i class="fa-solid fa-cloud-arrow-up upload-icon"></i>
+            <p>Drag & drop atau klik untuk memilih file X-Ray (.jpg, .jpeg, .png)</p>
+          </div>
+        </div>
+        <!-- Layout preview hanya muncul setelah gambar dipilih -->
+        <div id="previewSection" class="d-flex flex-column align-items-center mb-3" style="display:none !important;">
+          <div class="outer-preview-box d-flex align-items-center justify-content-center" style="background:#fff;border-radius:40px;padding:0;box-shadow:none;border:3px solid #fff;max-width:420px;width:100%;aspect-ratio:1/1;height:auto;">
+            <img id="uploadedXray" src="#" alt="Preview X-Ray" style="max-width:90%;max-height:90%;object-fit:contain;border-radius:32px;background:#fff;display:block;margin:auto;" />
+          </div>
+          <div class="d-flex justify-content-center gap-4 mt-4 w-100" style="max-width:370px;">
+            <button type="button" class="btn btn-secondary btn-reset px-4 py-2" id="resetBtn" style="font-size:1.25rem;font-weight:600;border-radius:16px;">Pilih Ulang</button>
+            <button type="submit" class="btn btn-success btn-lg px-4 py-2" id="predictBtn" style="font-size:1.25rem;font-weight:600;border-radius:16px;" disabled>Prediksi</button>
+          </div>
+        </div>
+      </div>
+      {% endif %}
+      {% if prediction %}
+      <div class="row mb-3 justify-content-center align-items-stretch gx-4">
+        <div class="col-md-6 d-flex align-items-stretch">
+          <div class="img-preview-box w-100 h-100 d-flex align-items-center justify-content-center">
+            {% if filename %}
+            <img src="{{ url_for('static', filename='uploads/' ~ filename) }}" alt="Gambar X-Ray"/>
+            {% else %}
+            <span class="text-muted">Gambar belum tersedia</span>
+            {% endif %}
+          </div>
+        </div>
+        <div class="col-md-6 d-flex align-items-stretch">
+          <div class="result-col w-100 h-100 d-flex flex-column align-items-stretch justify-content-start">
+            <div class="result-box {% if prediction == 'NORMAL' %}normal{% else %}pneumonia{% endif %}">
+              <div class="w-100">
+                <strong>Hasil:</strong> <span style="font-size:1.2em">{{ prediction }}</span><br>
+                <span style="font-size:1.08em">Probabilitas: <b>{{ probability|round(4) }}</b></span>
+              </div>
+            </div>
+            <div class="alert result-info {% if prediction == 'NORMAL' %}alert-success{% else %}alert-danger{% endif %} text-center">
+              {% if prediction == 'NORMAL' %}
+                <div class="result-title">Selamat!</div>
+                Hasil X-Ray Anda <b>NORMAL</b>.<br> Tetap jaga pola hidup sehat dan lakukan pemeriksaan rutin jika diperlukan.
+                <ul class="mt-3 mb-2 text-start" style="max-width:420px;margin:0 auto;">
+                  <li>🚭 Hindari asap rokok dan polusi udara.</li>
+                  <li>💪 Rutin berolahraga untuk meningkatkan kapasitas paru-paru.</li>
+                  <li>🥗 Konsumsi makanan bergizi seimbang.</li>
+                </ul>
+                <span class="text-primary d-block mt-2" style="font-size:0.98em;"></span>
+              {% else %}
+                <div class="result-title result-title-danger">Perhatian!</div>
+                Hasil X-Ray terdeteksi <b>PNEUMONIA</b>.<br> Segera konsultasi ke dokter untuk pemeriksaan lebih lanjut dan penanganan medis yang tepat.
+              {% endif %}
+            </div>
+            {% if prediction == 'PNEUMONIA' %}
+            {% endif %}
+          </div>
+        </div>
+      </div>
+      <div class="row justify-content-center mb-3">
+        <div class="col-md-12 d-flex justify-content-center">
+          <button type="submit" class="btn btn-success btn-lg px-4" id="predictBtn">
+            <i class="fa-solid fa-microscope me-2"></i>Prediksi
+          </button>
+        </div>
+      </div>
+      {% endif %}
+    </form>
+  </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+<script>
+const uploadArea = document.getElementById('uploadArea');
+const xrayInput = document.getElementById('xrayInput');
+const previewSection = document.getElementById('previewSection');
+const uploadedXray = document.getElementById('uploadedXray');
+const predictBtn = document.getElementById('predictBtn');
+const resetBtn = document.getElementById('resetBtn');
+const uploadSection = document.getElementById('uploadSection');
+
+// Drag & drop highlight
+uploadArea.addEventListener('dragover', (e) => {
+  e.preventDefault();
+  uploadArea.classList.add('dragover');
+});
+uploadArea.addEventListener('dragleave', (e) => {
+  e.preventDefault();
+  uploadArea.classList.remove('dragover');
+});
+uploadArea.addEventListener('drop', (e) => {
+  e.preventDefault();
+  uploadArea.classList.remove('dragover');
+  if (e.dataTransfer.files.length) {
+    xrayInput.files = e.dataTransfer.files;
+    showPreview(e.dataTransfer.files[0]);
+  }
+});
+
+// Click anywhere in the area triggers file input
+uploadArea.addEventListener('click', (e) => {
+  // Jangan trigger jika yang diklik adalah input file
+  if (e.target === xrayInput) return;
+  xrayInput.click();
+});
+
+// Show preview after file selected
+xrayInput.addEventListener('change', () => {
+  if (xrayInput.files.length) {
+    showPreview(xrayInput.files[0]);
+  }
+});
+
+function showPreview(file) {
+  const reader = new FileReader();
+  reader.onload = (e) => {
+    uploadedXray.src = e.target.result;
+    uploadArea.style.display = 'none';
+    previewSection.style.display = 'flex';
+    predictBtn.disabled = false;
+  };
+  reader.readAsDataURL(file);
+}
+resetBtn.addEventListener('click', function() {
+  xrayInput.value = '';
+  uploadedXray.src = '#';
+  previewSection.style.display = 'none';
+  uploadArea.style.display = 'block';
+  predictBtn.disabled = true;
+});
+predictBtn.disabled = true;
+</script>
+{% endblock %} 

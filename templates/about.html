@@ -1,0 +1,104 @@
+{% extends "base.html" %}
+{% block title %}Tentang Aplikasi | Deteksi Pneumonia X-Ray{% endblock %}
+{% block content %}
+<div class="container py-4 fade-in">
+  <h2 class="fw-bold text-center mb-4" style="font-family:'Poppins',sans-serif;">Tentang Aplikasi</h2>
+  <div class="row justify-content-center mb-4">
+    <div class="col-lg-10">
+      <div class="card shadow-sm border-0 mb-4" style="border-radius:28px;min-height:140px;">
+        <div class="card-body d-flex align-items-center justify-content-center" style="min-height:140px;">
+          <div class="w-100 text-center" style="font-size:1.18rem;font-weight:500;">Aplikasi ini adalah sistem cerdas berbasis deep learning untuk mendeteksi pneumonia dari citra X-ray paru-paru. Dirancang untuk membantu skrining awal dan edukasi kesehatan, aplikasi ini mudah digunakan, cepat, dan menjaga privasi data pengguna.</div>
+        </div>
+      </div>
+      <div class="card shadow-sm border-0 mb-4" style="border-radius:28px;">
+        <div class="card-body">
+          <h5 class="fw-bold mb-4 text-center" style="font-family:'Poppins',sans-serif;">Teknologi Yang Digunakan</h5>
+          <div class="row text-center g-3 mb-4">
+            <div class="col-md-4">
+              <div class="d-flex flex-column align-items-center justify-content-center p-3">
+                <div class="mb-3 d-flex align-items-center justify-content-center" style="width:64px;height:64px;background:#26b7b7;border-radius:50%;"><i class="fa-solid fa-mountain-sun fa-2x text-white"></i></div>
+                <div class="fw-bold" style="font-size:1.15rem;">CNN</div>
+                <div style="font-size:0.98rem;">Convolutional Neural Network, teknologi deep learning yang sangat efektif untuk mengenali pola dan fitur pada citra X-ray.</div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="d-flex flex-column align-items-center justify-content-center p-3">
+                <div class="mb-3 d-flex align-items-center justify-content-center" style="width:64px;height:64px;background:#26b7b7;border-radius:50%;"><i class="fa-brands fa-python fa-2x text-white"></i></div>
+                <div class="fw-bold" style="font-size:1.15rem;">Flask</div>
+                <div style="font-size:0.98rem;">Framework web Python yang ringan dan fleksibel, digunakan untuk membangun backend aplikasi ini.</div>
+              </div>
+            </div>
+            <div class="col-md-4">
+              <div class="d-flex flex-column align-items-center justify-content-center p-3">
+                <div class="mb-3 d-flex align-items-center justify-content-center" style="width:64px;height:64px;background:#26b7b7;border-radius:50%;"><i class="fa-solid fa-code fa-2x text-white"></i></div>
+                <div class="fw-bold" style="font-size:1.15rem;">Python</div>
+                <div style="font-size:0.98rem;">Bahasa pemrograman populer yang digunakan untuk pengolahan data, machine learning, dan AI.</div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="card shadow-sm border-0 mb-4" style="border-radius:28px;">
+        <div class="card-body">
+          <h5 class="fw-bold mb-4 text-center" style="font-family:'Poppins',sans-serif;">Cara Penggunaan</h5>
+          <ul class="list-unstyled cara-list mb-0">
+            <li class="d-flex align-items-start mb-3">
+              <span class="cara-bullet me-3">1</span>
+              <div>
+                <span class="fw-bold">Upload Citra X-ray</span><br>
+                <span class="cara-desc">Unggah citra X-ray paru-paru dalam format JPG, PNG, atau gambar lain.</span>
+              </div>
+            </li>
+            <li class="d-flex align-items-start mb-3">
+              <span class="cara-bullet me-3">2</span>
+              <div>
+                <span class="fw-bold">Pastikan Gambar</span><br>
+                <span class="cara-desc">Pastikan gambar yang diunggah adalah hasil rontgen paru-paru.</span>
+              </div>
+            </li>
+            <li class="d-flex align-items-start mb-3">
+              <span class="cara-bullet me-3">3</span>
+              <div>
+                <span class="fw-bold">Prediksi</span><br>
+                <span class="cara-desc">Tunggu hingga hasil prediksi keluar.</span>
+              </div>
+            </li>
+            <li class="d-flex align-items-start mb-3">
+              <span class="cara-bullet me-3">4</span>
+              <div>
+                <span class="fw-bold">Hasil Prediksi</span><br>
+                <span class="cara-desc">Sistem menampilkan hasil: NORMAL atau  PNEUMONIA beserta tingkat kepercayaan.</span>
+              </div>
+            </li>
+            <li class="d-flex align-items-start">
+              <span class="cara-bullet me-3">5</span>
+              <div>
+                <span class="fw-bold">Lanjutan</span><br>
+                <span class="cara-desc">Jika hasil terdeteksi Pneumonia, konsultasikan ke dokter. Jika normal, tetap jaga pola hidup sehat.</span>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+<style>
+.step-circle {
+  width: 44px; height: 44px; background: #26b7b7; color: #fff; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.35rem; font-weight: 700; margin-bottom: 8px; box-shadow: 0 2px 8px 0 rgba(38,183,183,0.13);
+}
+.step-desc { font-size: 0.98rem; color: #444; }
+@media (max-width: 767px) {
+  .step-circle { width: 36px; height: 36px; font-size: 1.1rem; }
+  .step-desc { font-size: 0.93rem; }
+}
+.cara-list .cara-bullet {
+  display: flex; align-items: center; justify-content: center;
+  width: 36px; height: 36px; background: #26b7b7; color: #fff; border-radius: 50%; font-size: 1.18rem; font-weight: 700;
+  box-shadow: 0 2px 8px 0 rgba(38,183,183,0.13);
+}
+.cara-list .cara-desc { font-size: 0.98rem; color: #444; }
+.dark-mode .cara-list .cara-bullet { background: #1976D2; color: #fff; }
+.dark-mode .cara-list .cara-desc { color: #E3EAF7; }
+</style> 

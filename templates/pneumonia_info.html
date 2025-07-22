@@ -1,0 +1,307 @@
+{% extends "base.html" %}
+{% block title %}Tentang Pneumonia - AI Pneumonia Detector{% endblock %}
+{% block head %}
+<style>
+.accordion-item {
+  border: none;
+  border-radius: 18px !important;
+  margin-bottom: 18px;
+  box-shadow: 0 6px 32px 0 rgba(25, 118, 210, 0.13), 0 1.5px 8px 0 rgba(60,60,60,0.07);
+  background: #fcfdff !important;
+}
+.dark-mode .accordion-item {
+  background: #232B3E !important;
+  border: 1.5px solid #3A4666 !important;
+  color: #E3EAF7 !important;
+  box-shadow: 0 6px 32px 0 rgba(25, 118, 210, 0.18), 0 1.5px 8px 0 rgba(60,60,60,0.13) !important;
+}
+.accordion-button {
+  border-radius: 18px !important;
+  font-size: 1.15rem;
+  font-weight: 700;
+  padding: 1.1rem 1.5rem;
+  background: #fcfdff !important;
+  color: #232e4d;
+  box-shadow: none;
+}
+.dark-mode .accordion-button {
+  background: #232B3E !important;
+  color: #E3EAF7 !important;
+}
+.accordion-button:focus {
+  box-shadow: 0 0 0 2px #b3d3f6;
+}
+.accordion-button:not(.collapsed) {
+  color: #1976D2;
+  background: #f0f6fc !important;
+}
+.dark-mode .accordion-button:not(.collapsed) {
+  color: #90caf9 !important;
+  background: #181f33 !important;
+}
+.accordion-body {
+  font-size: 1.08rem;
+  padding: 1.1rem 1.5rem 1.1rem 1.5rem;
+  border-radius: 0 0 18px 18px;
+  background: #fcfdff;
+}
+.dark-mode .accordion-body {
+  background: #232B3E !important;
+  color: #E3EAF7 !important;
+}
+</style>
+{% endblock %}
+{% block content %}
+<div class="container py-5">
+    <div class="text-center mb-5">
+        <h1 class="display-5 fw-bold mb-3 section-title">
+            <i class="fas fa-virus section-title-icon"></i> Mengenal Pneumonia
+        </h1>
+    </div>
+    <!-- Accordion Section -->
+    <div class="row justify-content-center">
+        <div class="col-lg-8">
+            <div class="accordion" id="pneumoniaAccordion">
+                <!-- Gejala Umum -->
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingSymptoms">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseSymptoms">
+                            <i class="fas fa-thermometer-half text-primary me-3"></i>
+                            <strong>Gejala Umum</strong>
+                        </button>
+                    </h2>
+                    <div id="collapseSymptoms" class="accordion-collapse collapse show" data-bs-parent="#pneumoniaAccordion">
+                        <div class="accordion-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h6 class="text-primary">Gejala Ringan:</h6>
+                                    <ul>
+                                        <li>Batuk kering atau berdahak</li>
+                                        <li>Demam ringan (37.5-38.5°C)</li>
+                                        <li>Nafas pendek saat beraktivitas</li>
+                                        <li>Nyeri dada ringan</li>
+                                        <li>Kelelahan dan lemah</li>
+                                    </ul>
+                                </div>
+                                <div class="col-md-6">
+                                    <h6 class="text-danger">Gejala Berat:</h6>
+                                    <ul>
+                                        <li>Demam tinggi (&gt;39°C)</li>
+                                        <li>Batuk berdahak kental</li>
+                                        <li>Sesak nafas parah</li>
+                                        <li>Nyeri dada tajam</li>
+                                        <li>Bibir atau kuku membiru</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Penyebab -->
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingCauses">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseCauses">
+                            <i class="fas fa-bug text-primary me-3"></i>
+                            <strong>Penyebab</strong>
+                        </button>
+                    </h2>
+                    <div id="collapseCauses" class="accordion-collapse collapse" data-bs-parent="#pneumoniaAccordion">
+                        <div class="accordion-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h6 class="text-primary">Bakteri:</h6>
+                                    <ul>
+                                        <li><strong>Streptococcus pneumoniae</strong> (paling umum)</li>
+                                        <li>Haemophilus influenzae</li>
+                                        <li>Mycoplasma pneumoniae</li>
+                                        <li>Legionella pneumophila</li>
+                                    </ul>
+                                </div>
+                                <div class="col-md-6">
+                                    <h6 class="text-info">Virus:</h6>
+                                    <ul>
+                                        <li>Influenza virus</li>
+                                        <li>Respiratory syncytial virus (RSV)</li>
+                                        <li>SARS-CoV-2 (COVID-19)</li>
+                                        <li>Adenovirus</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="mt-3">
+                                <h6 class="text-warning">Penyebab Lain:</h6>
+                                <ul>
+                                    <li>Jamur (pada pasien imunokompromais)</li>
+                                    <li>Bahan kimia beracun</li>
+                                    <li>Aspirasi makanan atau cairan</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Faktor Risiko -->
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingRisk">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseRisk">
+                            <i class="fas fa-user-shield text-primary me-3"></i>
+                            <strong>Faktor Risiko</strong>
+                        </button>
+                    </h2>
+                    <div id="collapseRisk" class="accordion-collapse collapse" data-bs-parent="#pneumoniaAccordion">
+                        <div class="accordion-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h6 class="text-primary">Usia:</h6>
+                                    <ul>
+                                        <li>Bayi dan anak-anak &lt; 5 tahun</li>
+                                        <li>Lansia &gt; 65 tahun</li>
+                                        <li>Sistem imun belum matang atau menurun</li>
+                                    </ul>
+                                </div>
+                                <div class="col-md-6">
+                                    <h6 class="text-danger">Kondisi Medis:</h6>
+                                    <ul>
+                                        <li>Penyakit paru kronis (asma, COPD)</li>
+                                        <li>Diabetes mellitus</li>
+                                        <li>Penyakit jantung</li>
+                                        <li>HIV/AIDS</li>
+                                        <li>Kanker dan kemoterapi</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="mt-3">
+                                <h6 class="text-warning">Gaya Hidup:</h6>
+                                <ul>
+                                    <li>Merokok aktif dan pasif</li>
+                                    <li>Konsumsi alkohol berlebihan</li>
+                                    <li>Malnutrisi</li>
+                                    <li>Kurang tidur</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Diagnosis -->
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingDiagnosis">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseDiagnosis">
+                            <i class="fas fa-vials text-primary me-3"></i>
+                            <strong>Diagnosis</strong>
+                        </button>
+                    </h2>
+                    <div id="collapseDiagnosis" class="accordion-collapse collapse" data-bs-parent="#pneumoniaAccordion">
+                        <div class="accordion-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h6 class="text-primary">Pemeriksaan Fisik:</h6>
+                                    <ul>
+                                        <li>Pemeriksaan tanda vital</li>
+                                        <li>Auskultasi paru (mendengar suara nafas)</li>
+                                        <li>Perkusi dada</li>
+                                        <li>Pemeriksaan oksigenasi</li>
+                                    </ul>
+                                </div>
+                                <div class="col-md-6">
+                                    <h6 class="text-info">Pemeriksaan Penunjang:</h6>
+                                    <ul>
+                                        <li><strong>X-ray dada</strong> (paling penting)</li>
+                                        <li>CT scan (jika diperlukan)</li>
+                                        <li>Pemeriksaan darah lengkap</li>
+                                        <li>Kultur dahak</li>
+                                        <li>Pulse oximetry</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="alert alert-info mt-3">
+                                <i class="fas fa-info-circle me-2"></i>
+                                <strong>Catatan:</strong> X-ray dada adalah pemeriksaan utama untuk mendiagnosis pneumonia dan menentukan lokasi serta luasnya infeksi.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Pencegahan -->
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingPrevention">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapsePrevention">
+                            <i class="fas fa-syringe text-primary me-3"></i>
+                            <strong>Pencegahan</strong>
+                        </button>
+                    </h2>
+                    <div id="collapsePrevention" class="accordion-collapse collapse" data-bs-parent="#pneumoniaAccordion">
+                        <div class="accordion-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h6 class="text-success">Vaksinasi:</h6>
+                                    <ul>
+                                        <li><strong>Vaksin Pneumokokus</strong> (PCV13, PPSV23)</li>
+                                        <li>Vaksin Influenza tahunan</li>
+                                        <li>Vaksin COVID-19</li>
+                                        <li>Vaksin Hib (untuk anak)</li>
+                                    </ul>
+                                </div>
+                                <div class="col-md-6">
+                                    <h6 class="text-primary">Gaya Hidup Sehat:</h6>
+                                    <ul>
+                                        <li>Berhenti merokok</li>
+                                        <li>Olahraga teratur</li>
+                                        <li>Makan makanan bergizi</li>
+                                        <li>Tidur cukup (7-8 jam)</li>
+                                        <li>Minum air putih cukup</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="mt-3">
+                                <h6 class="text-warning">Kebersihan:</h6>
+                                <ul>
+                                    <li>Cuci tangan dengan sabun</li>
+                                    <li>Gunakan masker saat sakit</li>
+                                    <li>Hindari kontak dengan penderita</li>
+                                    <li>Jaga kebersihan lingkungan</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Pengobatan -->
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="headingTreatment">
+                        <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTreatment">
+                            <i class="fas fa-pills text-primary me-3"></i>
+                            <strong>Pengobatan</strong>
+                        </button>
+                    </h2>
+                    <div id="collapseTreatment" class="accordion-collapse collapse" data-bs-parent="#pneumoniaAccordion">
+                        <div class="accordion-body">
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <h6 class="text-primary">Pengobatan Medis:</h6>
+                                    <ul>
+                                        <li><strong>Antibiotik</strong> (untuk pneumonia bakteri)</li>
+                                        <li>Antiviral (untuk pneumonia virus)</li>
+                                        <li>Obat penurun demam</li>
+                                        <li>Obat batuk dan ekspektoran</li>
+                                        <li>Oksigen (jika diperlukan)</li>
+                                    </ul>
+                                </div>
+                                <div class="col-md-6">
+                                    <h6 class="text-info">Perawatan Suportif:</h6>
+                                    <ul>
+                                        <li>Istirahat total</li>
+                                        <li>Minum banyak cairan</li>
+                                        <li>Makan makanan bergizi</li>
+                                        <li>Fisioterapi pernapasan</li>
+                                        <li>Pemantauan rutin</li>
+                                    </ul>
+                                </div>
+                            </div>
+                            <div class="alert alert-warning mt-3">
+                                <i class="fas fa-exclamation-triangle me-2"></i>
+                                <strong>Penting:</strong> Selalu konsultasikan dengan dokter untuk pengobatan yang tepat. Jangan mengobati sendiri.
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %} 

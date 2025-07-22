@@ -1,0 +1,38 @@
+{% extends "base.html" %}
+
+{% block title %}Beranda | Deteksi Pneumonia X-Ray{% endblock %}
+
+{% block content %}
+<div class="container home-hero-container fade-in">
+  <div class="text-center mb-4 home-hero-header">
+    <h1 class="fw-bold mb-2 home-title" style="font-family:'Poppins',sans-serif;margin-top:48px;">PneumoDetect</h1>
+    <p class="lead mb-4" style="font-family:'Lato',sans-serif;max-width:600px;margin:0 auto;">Sistem cerdas berbasis AI untuk mendeteksi pneumonia dari citra X-ray paru-paru dengan akurasi tinggi</p>
+    <div class="d-flex justify-content-center mt-4">
+      <a href="/predict" class="btn btn-primary btn-lg px-5 py-3" style="border-radius:28px;font-size:1.25rem;box-shadow:0 4px 16px 0 rgba(38,183,183,0.13);">Mulai Prediksi</a>
+    </div>
+  </div>
+  <div class="row justify-content-center g-4 home-feature-row">
+    <div class="col-md-4">
+      <div class="card shadow-sm border-0 h-100 text-center p-5" style="border-radius:28px;min-height:320px;">
+        <div class="mx-auto mb-3 d-flex align-items-center justify-content-center" style="width:70px;height:70px;background:#26b7b7;border-radius:50%;"><i class="fa-solid fa-microchip fa-2x text-white"></i></div>
+        <h4 class="fw-bold mb-2 mt-3" style="font-family:'Poppins',sans-serif;">AI Canggih</h4>
+        <p class="mb-0" style="font-size:1.13rem;font-family:'Lato',sans-serif;">Menggunakan arsitektur VGG-16 yang telah dilatih dengan ribuan citra X-ray untuk akurasi maksimal</p>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card shadow-sm border-0 h-100 text-center p-5" style="border-radius:28px;min-height:320px;">
+        <div class="mx-auto mb-3 d-flex align-items-center justify-content-center" style="width:70px;height:70px;background:#26b7b7;border-radius:50%;"><i class="fa-solid fa-bolt fa-2x text-white"></i></div>
+        <h4 class="fw-bold mb-2 mt-3" style="font-family:'Poppins',sans-serif;">Hasil Cepat</h4>
+        <p class="mb-0" style="font-size:1.13rem;font-family:'Lato',sans-serif;">Analisis citra X-ray dalam hitungan detik dengan hasil yang akurat dan terpercaya</p>
+      </div>
+    </div>
+    <div class="col-md-4">
+      <div class="card shadow-sm border-0 h-100 text-center p-5" style="border-radius:28px;min-height:320px;">
+        <div class="mx-auto mb-3 d-flex align-items-center justify-content-center" style="width:70px;height:70px;background:#26b7b7;border-radius:50%;"><i class="fa-solid fa-shield-halved fa-2x text-white"></i></div>
+        <h4 class="fw-bold mb-2 mt-3" style="font-family:'Poppins',sans-serif;">Aman & Privat</h4>
+        <p class="mb-0" style="font-size:1.13rem;font-family:'Lato',sans-serif;">Data citra Anda diproses secara aman dan tidak disimpan di server kami</p>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %} 

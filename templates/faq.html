@@ -1,0 +1,116 @@
+{% extends 'base.html' %}
+{% block title %}FAQ - Pneumonia Detection{% endblock %}
+{% block head %}
+<style>
+.accordion-item {
+  border: none;
+  border-radius: 32px !important;
+  margin-bottom: 28px;
+  box-shadow: 0 6px 32px 0 rgba(25, 118, 210, 0.13), 0 1.5px 8px 0 rgba(60,60,60,0.07);
+  background: #fcfdff !important;
+}
+.dark-mode .accordion-item {
+  background: #232B3E !important;
+  border: 1.5px solid #3A4666 !important;
+  color: #E3EAF7 !important;
+  box-shadow: 0 6px 32px 0 rgba(25, 118, 210, 0.18), 0 1.5px 8px 0 rgba(60,60,60,0.13) !important;
+}
+.accordion-button {
+  border-radius: 32px !important;
+  font-size: 1.35rem;
+  font-weight: 700;
+  padding: 1.5rem 2rem;
+  background: #fcfdff !important;
+  color: #232e4d;
+  box-shadow: none;
+}
+.dark-mode .accordion-button {
+  background: #232B3E !important;
+  color: #E3EAF7 !important;
+}
+.accordion-button:focus {
+  box-shadow: 0 0 0 2px #b3d3f6;
+}
+.accordion-button:not(.collapsed) {
+  color: #1976D2;
+  background: #f0f6fc !important;
+}
+.dark-mode .accordion-button:not(.collapsed) {
+  color: #90caf9 !important;
+  background: #181f33 !important;
+}
+.accordion-body {
+  font-size: 1.13rem;
+  padding: 1.5rem 2rem 1.5rem 2rem;
+  border-radius: 0 0 32px 32px;
+  background: #fcfdff;
+}
+.dark-mode .accordion-body {
+  background: #232B3E !important;
+  color: #E3EAF7 !important;
+}
+@media (max-width: 767px) {
+  .accordion-button, .accordion-body { padding: 1.1rem 1rem; font-size: 1.05rem; }
+  .accordion-item { border-radius: 18px !important; }
+}
+</style>
+{% endblock %}
+{% block content %}
+<div class="container py-5">
+  <div class="row justify-content-center">
+    <div class="col-lg-8">
+      <h1 class="mb-4 text-center"><i class="fas fa-question-circle text-primary"></i> FAQ - Pertanyaan Umum</h1>
+      <div class="accordion" id="faqAccordion">
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="faq1">
+            <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFaq1" aria-expanded="true" aria-controls="collapseFaq1">
+              Apa itu aplikasi deteksi pneumonia ini?
+            </button>
+          </h2>
+          <div id="collapseFaq1" class="accordion-collapse collapse show" aria-labelledby="faq1" data-bs-parent="#faqAccordion">
+            <div class="accordion-body">
+              Aplikasi ini adalah sistem berbasis web yang menggunakan kecerdasan buatan (AI) untuk mendeteksi kemungkinan pneumonia dari citra rontgen dada (X-ray) secara otomatis dan edukatif.
+            </div>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="faq2">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFaq2" aria-expanded="false" aria-controls="collapseFaq2">
+              Bagaimana cara menggunakan fitur prediksi?
+            </button>
+          </h2>
+          <div id="collapseFaq2" class="accordion-collapse collapse" aria-labelledby="faq2" data-bs-parent="#faqAccordion">
+            <div class="accordion-body">
+              Anda cukup mengunggah foto rontgen dada pada halaman <b>Prediksi</b>, lalu sistem akan menganalisis dan menampilkan hasil deteksi beserta penjelasan edukatif.
+            </div>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="faq3">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFaq3" aria-expanded="false" aria-controls="collapseFaq3">
+              Apakah hasil deteksi ini bisa dijadikan diagnosis medis?
+            </button>
+          </h2>
+          <div id="collapseFaq3" class="accordion-collapse collapse" aria-labelledby="faq3" data-bs-parent="#faqAccordion">
+            <div class="accordion-body">
+              Tidak. Hasil deteksi dari aplikasi ini hanya sebagai alat bantu edukasi dan skrining awal. Diagnosis pasti tetap harus dilakukan oleh dokter spesialis radiologi atau paru.
+            </div>
+          </div>
+        </div>
+        <div class="accordion-item">
+          <h2 class="accordion-header" id="faq4">
+            <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseFaq4" aria-expanded="false" aria-controls="collapseFaq4">
+              Apakah data dan gambar saya aman?
+            </button>
+          </h2>
+          <div id="collapseFaq4" class="accordion-collapse collapse" aria-labelledby="faq4" data-bs-parent="#faqAccordion">
+            <div class="accordion-body">
+              Ya, data dan gambar yang Anda unggah hanya digunakan untuk proses deteksi dan tidak disimpan permanen di server.
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %} 
